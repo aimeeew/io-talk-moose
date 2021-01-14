@@ -1,0 +1,21 @@
+.button {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+}
+
+.button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+main {
+    padding: 20px;
+}
+
+main div {
+    padding-top: 10px;
+}

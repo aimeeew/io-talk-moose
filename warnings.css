@@ -1,0 +1,166 @@
+form button:not([type]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: this button doesn’t have a type attribute. Is it a submit, reset or just button?';
+}
+
+.button:not(button):after {
+    background: black;
+    border: dashed 10px orangered;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: You are making an element look like a button here. Is it really a button?';
+}
+
+button.disabled:not([disabled]):after, a.disabled[href]:after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: It looks like you are styling an element to be disabled here. Make sure it is disabled properly.';
+}
+
+/*
+If a button/link has no content at all and also has no accessible ARIA label, display a warning, or
+if there is some content inside the button/link and it’s just an image and that image doesn’t have an alt attibute, display a warning
+*/
+a:empty:not([aria-label]):not([aria-labelledby]):after,
+button:empty:not([aria-label]):not([aria-labelledby]):after,
+button:not([aria-label]):not([aria-labelledby]) img:only-child:not([alt]):after,
+a:not([aria-label]):not([aria-labelledby]) img:only-child:not([alt]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: You are not providing enough information about what this button/link does. Please include some text within the button/link.';
+}
+
+section > section:first-child:after {
+    background: black;
+    color: #fff;
+    content: 'ACCESSIBILITY WARNING: it looks like you are using sections like divs. Sections should each have a heading';
+}
+
+#navigation:not([role="navigation"]):after {
+      background: black;
+      color: orangered;
+      content: 'ACCESSIBILITY WARNING: You appear to be linking to a principal navigation block. Make sure it has the navigation ARIA role';
+}
+
+[aria-controls="navigation"]:not([href="#navigation"]):after {
+      background: black;
+      color: orangered;
+      content: 'ACCESSIBILITY WARNING: When JavaScript is turned off, this should be a link and should go to the navigation landmark';
+}
+
+[role="tablist"] a:not([role="tab"]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: All links inside a tablist should be defined as tabs, using the tab ARIA role';
+}
+
+[role="tabpanel"]:not([id]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: Each tabpanel should be identified with an id attribute';
+}
+
+[role="tab"]:not([aria-controls]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: Each tab should explicitly control a tabpanel using the aria-controls attribute';
+}
+
+[role="status"]:not([aria-live="polite"]),
+[role="alert"]:not([aria-live="assertive"]) {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: For better support, you should include a politeness setting for your live region role using the aria-live attribute';
+}
+
+[aria-live="polite"]:not([role="status"]),
+[aria-live="assertive"]:not([role="alert"]) {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: For better support, you should include a corresponding role for your aria-live politeness setting';
+}
+
+img:not([alt]),
+[role="img"]:not([alt]) {
+    background: black;
+    color: orangered;
+    border: dashed 10px orangered;
+    content: 'ACCESSIBILITY WARNING: All images should have an alt attribute';
+}
+
+html:not([lang]),
+html:not([lang]):after {
+    border: dashed 10px orangered;
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: html tags should have a valid lang attribute';
+}
+
+[aria-hidden="true"] a[href]:not([tabindex='-1']):after,
+[aria-hidden="true"] area[href]:not([tabindex='-1']):after,
+[aria-hidden="true"] input:not([disabled]):not([tabindex='-1']):after,
+[aria-hidden="true"] select:not([disabled]):not([tabindex='-1']):after,
+[aria-hidden="true"] textarea:not([disabled]):not([tabindex='-1']):after,
+[aria-hidden="true"] button:not([disabled]):not([tabindex='-1']):after,
+[aria-hidden="true"] iframe:not([tabindex='-1']):after,
+[aria-hidden="true"] [tabindex]:not([tabindex='-1']):after,
+[aria-hidden="true"] [contentEditable=true]:not([tabindex='-1']):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: aria-hidden elements should not contain focusable elements';
+}
+
+body[aria-hidden="true"]:after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: aria-hidden must not present on the body tag';
+}
+
+a:not([href]):not([role="button"]):after {
+    background: black;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: this link needs either an href or a button role';
+}
+
+/*
+:has(> input) is currently a working draft for browsers to implement
+we could then hide warnings on labels that wrap the input
+https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+*/
+label:not([for]):after {
+    background: black;
+    border: dashed 10px orangered;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: this label does not have a "for" property to link to an element';
+}
+
+/*
+:after does not work on inputs, so this just makes it black with a big orangered border,
+all inputs apart from type button, submit or reset
+*/
+input[type="text"]:not([id]),
+input[type="checkbox"]:not([id]),
+input[type="radio"]:not([id]),
+input[type="color"]:not([id]),
+input[type="date"]:not([id]),
+input[type="datetime-local"]:not([id]),
+input[type="email"]:not([id]),
+input[type="file"]:not([id]),
+input[type="image"]:not([id]),
+input[type="month"]:not([id]),
+input[type="number"]:not([id]),
+input[type="password"]:not([id]),
+input[type="range"]:not([id]),
+input[type="search"]:not([id]),
+input[type="tel"]:not([id]),
+input[type="time"]:not([id]),
+input[type="url"]:not([id]),
+input[type="week"]:not([id]),
+textarea:not([id]),
+select:not([id])
+ {
+    background: black;
+    border: dashed 10px orangered;
+    color: orangered;
+    content: 'ACCESSIBILITY WARNING: this input has no id connecting it to a label';
+}
